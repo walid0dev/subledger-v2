@@ -1,0 +1,74 @@
+@startuml
+' --- Classes principales ---
+class User {
+  +objectId id
+  +String name
+  +String email
+  +String passwordHash
+  +Role role
+  +DateTime createdAt
+}
+
+enum Role {
+  user
+  admin
+}
+
+class Subscription {
+  +objectId id
+  +String name
+  +Decimal price
+  +BillingCycle billingCycle
+  +Date startDate
+  +SubscriptionStatus status
+  +objectId userId
+  +DateTime createdAt
+}
+
+enum BillingCycle {
+  monthly
+  yearly
+}
+
+enum SubscriptionStatus {
+  active
+  cancelled
+}
+
+class Transaction {
+  +objectId id
+  +Decimal amount
+  +Date paymentDate
+  +objectId subscriptionId
+  +DateTime createdAt
+}
+
+' --- Associations ---
+User "1" -- "0..*" Subscription : owns >
+Subscription "1" -- "0..*" Transaction : has >
+
+' --- Contraintes et notes ---
+note right of User
+  Constraints:
+  - email must be unique
+  - password stored as bcrypt hash
+  - role ∈ {user, admin}
+end note
+
+note right of Subscription
+  Constraints:
+  - price > 0
+  - billingCycle ∈ {monthly, yearly}
+  - status ∈ {active, cancelled}
+  - subscription.userId references existing User
+end note
+
+note right of Transaction
+  Constraints:
+  - amount > 0
+  - transaction.subscriptionId references existing Subscription
+end note
+
+
+
+@enduml
