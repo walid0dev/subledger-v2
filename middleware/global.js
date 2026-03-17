@@ -19,6 +19,10 @@ export const globalErrorHandler = (err, req, res, next) => {
   });
 };
 
+/**
+ * 
+ * @param {import("express").Handler} fn 
+ */
 export const catchAsync = (fn) => {
   return (req, res, next) => {
     fn(req, res, next).catch(next);

@@ -6,12 +6,15 @@ import { globalErrorHandler } from "./middleware/global.js";
 import { NotFoundError } from "./utils/errors.js";
 import authRoutes from "./routes/auth.routes.js";
 import adminRoutes from "./routes/admin.routes.js"
+import subscriptionRoutes from "./routes/subscription.routes.js"
 
 const server = express();
 server.use(morgan("dev"));
 server.use(express.json());
 server.use("/auth", authRoutes);
 server.use("/admin" , adminRoutes)
+server.use("/user" , subscriptionRoutes)
+
 
 
 // health check
