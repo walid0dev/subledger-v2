@@ -35,5 +35,5 @@ server.use(globalErrorHandler);
 
 server.listen(env.PORT, async () => {
     await connectDB();
-    console.log(`server is running on port ${process.env.PORT}`);
+    console.log(`server is running on port ${env.PORT}`);
 });
