@@ -27,6 +27,7 @@
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/morgan": "^1.9.10",
-    "@types/node": "^25.3.5"
+    "@types/node": "^25.3.5",
+    "prettier": "^3.8.1"
   }
 }

@@ -7,6 +7,7 @@ export const validate = (schema) => async (req, res, next) => {
       query: req.query,
       params: req.params,
       headers: req.headers,
+      
     });
     Object.assign(req, result); // Merge validated data into req
     next();
