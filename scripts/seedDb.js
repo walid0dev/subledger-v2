@@ -54,6 +54,8 @@ const seedDatabase = async () => {
         role: 'user',
       });
     }
+    users[0].password_hash = await hashPassword('password'); // Set a known password for the first user for testing
+    console.log("test user"  , users[0] , "password");
     const createdUsers = await User.insertMany(users);
     console.log(`✓ Created ${createdUsers.length} users`);
 
