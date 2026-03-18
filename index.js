@@ -8,32 +8,32 @@ import authRoutes from "./routes/auth.routes.js";
 import adminRoutes from "./routes/admin.routes.js"
 import subscriptionRoutes from "./routes/subscription.routes.js"
 
+import statsroutes from "./routes/stats.routes.js";
 const server = express();
 server.use(morgan("dev"));
 server.use(express.json());
 server.use("/auth", authRoutes);
-server.use("/admin" , adminRoutes)
-server.use("/user" , subscriptionRoutes)
-
-
+server.use("/admin", adminRoutes)
+server.use("/user", subscriptionRoutes)
+server.use("/user", statsroutes);
 
 // health check
 server.get("/health", (req, res) => {
-  res.status(200).json({
-    status: "success",
-    message: "Server is healthy",
-  });
+    res.status(200).json({
+        status: "success",
+        message: "Server is healthy",
+    });
 });
 
 // catch all
 server.use((_, __, next) => {
-  next(new NotFoundError("Route not found"));
+    next(new NotFoundError("Route not found"));
 });
 
 // global error handler
 server.use(globalErrorHandler);
 
 server.listen(env.PORT, async () => {
-  await connectDB();
-  console.log(`server is running on port ${process.env.PORT}`);
+    await connectDB();
+    console.log(`server is running on port ${process.env.PORT}`);
 });
