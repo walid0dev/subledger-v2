@@ -67,6 +67,11 @@ class ConflictError extends AppError {
   }
 }
 
+class InternalError extends AppError {
+  constructor(message = "Internal server error") {
+    super(500, ERROR_CODES.INTERNAL_ERROR, message);
+  }
+}
 export {
   AppError,
   NotFoundError,
@@ -75,4 +80,5 @@ export {
   UnauthorizedError,
   ForbiddenError,
   ConflictError,
+  InternalError,
 };
